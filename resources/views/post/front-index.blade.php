@@ -36,27 +36,27 @@
                                     <div class="card border-0 mb-5">
                                         <div class="row no-gutters align-items-center align-items-center">
                                             <div class="col-md-5">
-                                                <a href="archive-layout-one.html#"> <img src="{{ asset('storage/' . $item->image) }}" class="card-img"
+                                                <a href="{{ route('posts.show', ['post' => $item->id]) }}"> <img src="{{ asset('storage/' . $item->image) }}" class="card-img"
                                                         alt=""></a>
                                             </div>
                                             <div class="col-md-7">
                                                 <div class="card-body">
                                                     <ul class="category-tag-list">
                                                         <li class="category-tag-name">
-                                                            <a href="archive-layout-one.html#">{{ $item->category->name }}</a>
+                                                            <a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->category->name }}</a>
                                                         </li>
         
                                                     </ul>
-                                                    <h5 class="card-title title-font"><a href="archive-layout-one.html#">{{ $item->title }}</a></h5>
+                                                    <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->title }}</a></h5>
                                                     <p class="card-text">{{ Str::limit($item->content, 150, '...') }}<p>
     
                                                             <div class="author-date">
-                                                                <a class="author" href="archive-layout-one.html#">
+                                                                <a class="author" href="{{ route('posts.show', ['post' => $item->id]) }}">
                                                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s" alt=""
                                                                         class="rounded-circle" />
                                                                     <span class="writer-name-small">Julie</span>
                                                                 </a>
-                                                                <a class="date" href="archive-layout-one.html#">
+                                                                <a class="date" href="{{ route('posts.show', ['post' => $item->id]) }}">
                                                                     <span>{{ $item->created_at->format('d M, Y') }}</span>
                                                                 </a>
                                                             </div>
@@ -81,7 +81,7 @@
                                         <div class="card border-0">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-3 col-md-3">
-                                                    <a href="archive-layout-one.html#">
+                                                    <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                                                         <img src="{{ asset('storage/' . $item->image) }}" class="card-img" alt="">
                                                     </a>
                                                 </div>
@@ -89,13 +89,13 @@
                                                     <div class="card-body">
                                                         <ul class="category-tag-list mb-0">
                                                             <li class="category-tag-name">
-                                                                <a href="archive-layout-one.html#">{{$item->category->name}}</a>
+                                                                <a href="{{ route('posts.show', ['post' => $item->id]) }}">{{$item->category->name}}</a>
                                                             </li>
                                                         </ul>
-                                                        <h5 class="card-title title-font"><a href="archive-layout-one.html#"></a>
+                                                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}"></a>
                                                         </h5>
                                                         <div class="author-date">
-                                                            <a class="date" href="archive-layout-one.html#">
+                                                            <a class="date" href="{{ route('posts.show', ['post' => $item->id]) }}">
                                                                 <span>{{ $item->created_at->format('d M, Y') }}</span>
                                                             </a>
                                                         </div>
@@ -114,7 +114,7 @@
                                     <div class="sidebar-content">
                                         <ul class="sidebar-list tags-list">
                                             @foreach ($tags as $item)
-                                                <li><a href="archive-layout-one.html#">{{ $item->name }}</a></li>
+                                                <li><a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -128,12 +128,12 @@
                                         <div class="category-name-list">
                                             @foreach ($categories as $item)
                                                 <div class="card small-card">
-                                                    <a href="archive-layout-one.html#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img"
+                                                    <a href="{{ route('posts.show', ['post' => $item->id]) }}"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img"
                                                             alt="" /></a>
                                                     <div class="card-img-overlay">
-        
+
                                                         <h5 class="card-title title-font mb-0">
-                                                            <a href="archive-layout-one.html#">{{$item->name}}</a>
+                                                            <a href="{{ route('posts.show', ['post' => $item->id]) }}">{{$item->name}}</a>
                                                         </h5>
                                                     </div>
                                                 </div>                                                
@@ -155,13 +155,13 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <li class="page-item disabled">
-                            <a class="page-link" href="archive-layout-one.html#" tabindex="-1"><i class="fas fa-arrow-left"></i></a>
+                            <a class="page-link" href="{{ route('posts.show', ['post' => $item->id]) }}" tabindex="-1"><i class="fas fa-arrow-left"></i></a>
                         </li>
-                        <li class="page-item active"><a class="page-link" href="archive-layout-one.html#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="archive-layout-one.html#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="archive-layout-one.html#">3</a></li>
+                        <li class="page-item active"><a class="page-link" href="{{ route('posts.show', ['post' => $item->id]) }}">1</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ route('posts.show', ['post' => $item->id]) }}">2</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ route('posts.show', ['post' => $item->id]) }}">3</a></li>
                         <li class="page-item">
-                            <a class="page-link" href="archive-layout-one.html#"><i class="fas fa-arrow-right"></i></a>
+                            <a class="page-link" href="{{ route('posts.show', ['post' => $item->id]) }}"><i class="fas fa-arrow-right"></i></a>
                         </li>
                     </ul>
                 </nav>

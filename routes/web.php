@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 
 // Home Route
@@ -47,7 +47,7 @@ Route::get('/posts', [PostController::class, 'frontIndex'])->name('posts.front.i
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // Comment Submission
-Route::post('/comment/{post}', [Comment::class, 'store'])->name('comment.store');
+Route::post('/comment/{post}', [CommentController::class, 'store'])->name('comment.store');
 
 // Authentication Routes
 Route::controller(AuthController::class)->group(function () {

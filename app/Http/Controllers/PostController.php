@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Dom\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -100,8 +101,15 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $categories = Category::all();
-        $item = Post::findOrFail($post);
-        return view('post.show' , compact('item','categories'));
+        $tags = $post->tags->pluck('name')->toArray(); 
+        $comments = $post->comments()->latest()->get();
+        $relatedPosts = $post->category->posts()
+        ->where('id', '!=', $post->id) // Exclude the current post
+        ->latest()
+        ->take(4)
+        ->get();
+
+        return view('post.show' , compact('post','categories','tags','comments','relatedPosts'));
     }
 
     /**

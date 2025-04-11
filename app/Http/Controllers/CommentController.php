@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
 
 class CommentController extends Controller
 {
@@ -20,16 +22,24 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        $data = $request->validate([
-            'body' => 'required|string',
-            'user_id' => 'required|integer|exists:users,id',
-            'post_id' => 'required|integer|exists:posts,id', 
+        $request->validate([
+            'content' => 'required|string|max:500'
         ]);
     
-        Comment::create($data);
+        Comment::create([
+            'body' => $request->content,
+            'user_id' => Auth::id(),
+            'post_id' => $post->id,
+            'publish' => true,
+            'published_at' => now(),
+
+        ]);
+    
+        return redirect()->route('posts.show', $post)->with('success', 'Comment added successfully!');
     }
+    
 
     /**
      * Remove the specified resource from storage.
