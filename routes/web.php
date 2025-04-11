@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Route;
 // Home Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/about', function () {
+    return 'a';
+})->name('about');
+
+Route::get('/contact', function () {
+    return 'a';
+})->name('contact');
+
 Route::middleware(['auth'])->group(function () {
     // Category Resource Routes with Admin Control
     Route::resource('category', CategoryController::class)
@@ -35,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Public Post Routes
-Route::get('/posts/a/a', [PostController::class, 'frontIndex'])->name('posts.front.index');
+Route::get('/posts', [PostController::class, 'frontIndex'])->name('posts.front.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // Comment Submission
