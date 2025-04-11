@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\{
-    AuthController, CategoryController, CommentController, HomeController, PostController
+    AuthController, CategoryController, CommentController, ContactController, HomeController, PostController
 };
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 // ===========================
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Route;
 // ===========================
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', fn() => 'a')->name('about');
-Route::get('/contact', fn() => 'a')->name('contact');
+Route::get('/about', function () {
+    return view('about', ['categories' => Category::all()]);
+})->name('about');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact/form', [ContactController::class, 'form'])->name('contact.form');
+
 
 // ===========================
 // Authentication Routes
