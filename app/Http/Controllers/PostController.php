@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -12,7 +13,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+
+        return view('post.index',compact(posts));
     }
 
     /**
@@ -20,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -28,7 +31,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'required|string|max:255',
+            'publish' => 'boolean',
+            'category_id' => 'required|integer|exists:posts,id', 
+        ]);
+        $data['user_id'] = Auth::id();
+
+        if ($data['publish'] == 1) { 
+            $data['published_at'] = now(); 
+        }
+
+        Post::crate($data);
+        
+        return redirect()->route('post.index');
     }
 
     /**
@@ -36,7 +54,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $item = Post::findOrFail($post);
+        return view('post.show' , compact('item'));
     }
 
     /**
@@ -44,7 +63,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $item = Post::findOrFail($post);
+        return view('post.show' , compact('item'));
     }
 
     /**
@@ -52,7 +72,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'required|string|max:255',
+            'publish' => 'boolean',
+            'category_id' => 'required|integer|exists:posts,id', 
+        ]);
+
+        if ($data['publish'] == 1) { 
+            $data['published_at'] = now(); 
+        }
+
+        Post::update($data);
+
+        return redirect()->route('post.index');
     }
 
     /**
