@@ -24,9 +24,12 @@ class PostController extends Controller
 
     public function frontIndex()
     {
-        $posts = Post::where('publish' ,'1');
+        $posts = Post::where('publish', '1')->latest()->paginate(25);
+        $topItems = Post::orderBy('views', 'desc')->take(8)->get();
+        $tags = Tag::all();
+        $categories = Category::all();
 
-        return view('post.index',compact('posts'));
+        return view('post.front-index',compact('posts','categories','topItems','tags'));
     }
 
     public function userIndex()
