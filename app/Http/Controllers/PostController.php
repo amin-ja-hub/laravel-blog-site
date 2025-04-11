@@ -15,7 +15,21 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return view('post.index',compact(posts));
+        return view('post.index',compact('posts'));
+    }
+
+    public function frontIndex()
+    {
+        $posts = Post::all();
+
+        return view('post.index',compact('posts'));
+    }
+
+    public function userIndex()
+    {
+        $posts = Post::all();
+
+        return view('post.index',compact('posts'));
     }
 
     /**
@@ -31,12 +45,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'required|string|max:255',
+            'image' => 'string|max:255',
             'publish' => 'boolean',
-            'category_id' => 'required|integer|exists:posts,id', 
+            'category_id' => 'integer|exists:posts,id', 
         ]);
         $data['user_id'] = Auth::id();
 
@@ -63,9 +78,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $item = Post::findOrFail($post);
-        return view('post.show' , compact('item'));
+        return view('posts.edit', compact('post'));
     }
+    
 
     /**
      * Update the specified resource in storage.
