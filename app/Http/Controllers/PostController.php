@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -53,35 +56,49 @@ class PostController extends Controller
             'content'     => 'required|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'publish'     => 'boolean',
-            'category_id' => 'integer|exists:categories,id',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tags'        => 'nullable|string', // Allow users to enter tags
         ]);
     
-        // Attach the authenticated user
+        $data = array_map('trim', $data); // Clean up inputs
         $data['user_id'] = Auth::id();
+        $data['published_at'] = $request->boolean('publish') ? now() : null;
     
-        // Handle image upload
+        // Handle Image Upload
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('posts', 'public');
         }
     
-        // Set publish timestamp if checked
-        if ($request->filled('publish')) {
-            $data['published_at'] = now();
-        }
+        // Database Transaction: Ensures everything saves or nothing
+        DB::transaction(function () use ($data, $request) {
+            $post = Post::create($data);
     
-        // Create the post
-        Post::create($data);
+            // Process Tags: Allow users to add new tags
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->tags); // Split tags by commas
+                $tagIds = [];
+    
+                foreach ($tagNames as $tagName) {
+                    $tagName = Str::lower(trim($tagName)); // Normalize names
+                    $tag = Tag::firstOrCreate(['name' => $tagName]); // Create or find
+                    $tagIds[] = $tag->id;
+                }
+    
+                $post->tags()->sync($tagIds); // Attach tags
+            }
+        });
     
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');
-    }    
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(Post $post)
     {
+        $categories = Category::all();
         $item = Post::findOrFail($post);
-        return view('post.show' , compact('item'));
+        return view('post.show' , compact('item','categories'));
     }
 
     /**
@@ -89,7 +106,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $categories = Category::all();
+    
+        // Retrieve existing tags as a comma-separated string
+        $selectedTags = $post->tags->pluck('name')->implode(', ');
+        return view('post.edit' , compact('post', 'categories', 'selectedTags'));
     }
     
 
@@ -99,23 +120,42 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'required|string|max:255',
-            'publish' => 'boolean',
-            'category_id' => 'required|integer|exists:categories,id', 
+            'title'       => 'required|string|max:255',
+            'content'     => 'required|string',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'publish'     => 'boolean',
+            'category_id' => 'required|integer|exists:categories,id',
+            'tags'        => 'nullable|string', // Allows users to add/modify tags
         ]);
     
-        if ($data['publish'] == 1) { 
-            $data['published_at'] = now(); 
+        // Process image upload (if updated)
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('posts', 'public');
         }
     
-        // Update the post
-        $post->update($data);
+        // Handle publish date
+        $data['published_at'] = $request->boolean('publish') ? now() : null;
+    
+        DB::transaction(function () use ($post, $data, $request) {
+            $post->update($data);
+    
+            // Process Tags
+            if ($request->filled('tags')) {
+                $tagNames = explode(',', $request->tags);
+                $tagIds = [];
+    
+                foreach ($tagNames as $tagName) {
+                    $tagName = Str::lower(trim($tagName)); // Normalize & clean
+                    $tag = Tag::firstOrCreate(['name' => $tagName]); // Create or find
+                    $tagIds[] = $tag->id;
+                }
+    
+                $post->tags()->sync($tagIds); // Sync tags efficiently
+            }
+        });
     
         return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
-
     /**
      * Remove the specified resource from storage.
      */

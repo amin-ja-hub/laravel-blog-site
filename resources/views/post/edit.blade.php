@@ -58,6 +58,16 @@
                     <label class="form-check-label" for="publish">Publish this post</label>
                 </div>
 
+                <!-- Tags Input Field -->
+                <div class="mb-3">
+                    <label for="tags" class="form-label fw-bold">Tags</label>
+                    <input type="text" name="tags" id="tags" class="form-control" placeholder="Enter tags, separated by commas" value="{{ old('tags', $selectedTags) }}">
+                    <small class="text-muted">Example: Laravel, PHP, Backend</small>
+                    @error('tags')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <!-- Submit Button -->
                 <button type="submit" class="btn btn-warning">Update Post</button>
                 <a href="{{ route('posts.index') }}" class="btn btn-secondary">Back to Posts</a>
