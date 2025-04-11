@@ -4,6 +4,7 @@ home
 @endsection
 
 @section('content')
+
     <!-- Banner section -->
     <section class="banner-section">
         <div class="main-banner">
@@ -203,7 +204,11 @@ home
     <section class="featured-posts">
         <div class="container">
         <div class="section-title">
-            <h2>Featured posts</h2>
+            <h2>Featured posts</h2>   
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                @csrf
+                <button type="submit">a</button>
+            </form>
         </div>
         <div class="row">
             <div class="col-md-12 col-lg-7">
