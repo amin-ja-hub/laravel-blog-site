@@ -17,7 +17,7 @@ home
                     @foreach ($randomPosts as $item)
                         <div class="banner-item">
                             <div class="banner-img">
-                            <a href="single-layout-one.html"> <img src="{{ asset('storage/' . $item->image) }}" alt=""></a>
+                            <a href="{{ route('posts.show', ['post' => $item->id]) }}"> <img src="{{ asset('storage/' . $item->image) }}" alt=""></a>
                             </div>
                             <div class="banner-text">
                             <ul class="category-tag-list">
@@ -26,10 +26,10 @@ home
                                 </li>
                             </ul>
                             <div class="title-font">
-                                <a href="single-layout-one.html">{{$item->title}}</a>
+                                <a href="{{ route('posts.show', ['post' => $item->id]) }}">{{$item->title}}</a>
                             </div>
                             <p class="mb-3">{{ Str::limit($item->content, 150, '...') }}</p>                   
-                            <a href="single-layout-one.html" class="btn btn-solid btn-read">Read More</a>
+                            <a href="{{ route('posts.show', ['post' => $item->id]) }}" class="btn btn-solid btn-read">Read More</a>
                             </div>
                         </div>     
                     @endforeach
@@ -48,7 +48,7 @@ home
                 @foreach ($latestPosts as $item)
                 <div class="col-md-4">
                     <div class="card">
-                    <a href="single-layout-one.html">
+                    <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                         <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top " alt="" />
                     </a>
                     <div class="card-body px-0">
@@ -58,7 +58,7 @@ home
                         </li>
                         </ul>
                         <h5 class="card-title title-font">
-                        <a href="single-layout-one.html">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                             {{ $item->title }}
                         </a>
                         </h5>
@@ -93,7 +93,7 @@ home
                     <div class="card mb-4">
                         <div class="row no-gutters align-items-center">
                         <div class="col-md-4">
-                            <a href="single-layout-one.html">
+                            <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                             <img src="{{ asset('storage/' . $item->image) }}" class="card-img " alt="">
                             </a>
                         </div>
@@ -104,7 +104,7 @@ home
                                 <a href="index.html#">{{ $item->category->name }}</a>
                                 </li>
                             </ul>
-                            <h5 class="card-title title-font"><a href="single-layout-one.html">{{ $item->title }}</a>
+                            <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->title }}</a>
                             </h5>
                             <p class="card-text"><p class="mb-3">{{ Str::limit($item->content, 150, '...') }}</p><p>
                                 <div class="author-date">
@@ -136,7 +136,7 @@ home
                                 {{$loop->iteration}}
                             </div>
                             <div class="content-right">
-                                <a href="single-layout-one.html">{{ $item->title }}</a>
+                                <a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->title }}</a>
         
                             </div>
                         </li>          
@@ -153,7 +153,7 @@ home
                 <div class="sidebar-content">
                 <div class="category-name-list">
                     <div class="card small-card">
-                        <a href="single-layout-one.html"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img" alt="" /></a>
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img" alt="" /></a>
                         <div class="card-img-overlay">
                             <h5 class="card-title title-font mb-0">
                             <a href="index.html#">Travel</a>
@@ -180,7 +180,7 @@ home
                 @foreach ($worstItems as $item)
                     <div class="col-md-4">
                         <div class="card">
-                        <a href="single-layout-one.html">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                             <img src="{{ asset('storage/' . $item->image) }}" class="card-img-top" alt="" />
                         </a>
                         <div class="card-body px-0">
@@ -190,7 +190,7 @@ home
                             </li>
                             </ul>
                             <h5 class="card-title title-font">
-                            <a href="single-layout-one.html">
+                            <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                                 {{ $item->title }}</a>
                             </h5>
                             <div class="author-date">

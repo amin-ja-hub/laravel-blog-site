@@ -114,7 +114,7 @@
                                     <div class="sidebar-content">
                                         <ul class="sidebar-list tags-list">
                                             @foreach ($tags as $item)
-                                                <li><a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->name }}</a></li>
+                                                <li><a href="{{ route('posts.search', ['filter' => $item->name]) }}">{{ $item->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </div>

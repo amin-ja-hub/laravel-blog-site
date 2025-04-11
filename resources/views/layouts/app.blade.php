@@ -109,7 +109,7 @@
                     </a>
                     <ul class="drop-menu">
                         @foreach ($categories as $item)
-                            <li class="drop-menu-item"><a href="archive-layout-one.html">{{$item->name}}</a></li>                        
+                            <li class="drop-menu-item"><a href="{{ route('posts.search', ['filter' => $item->name]) }}">{{$item->name}}</a></li>                        
                         @endforeach
                     </ul>
                     <li class="nav-item"><a href="{{route('posts.front.index')}}" class="nav-link">Blogs</a></li>
@@ -135,10 +135,11 @@
             <div id="search-overlay" class="search-section">
             <span class="closebtn"><i class="fas fa-times"></i></span>
             <div class="overlay-content">
-                <form>
-                <input type="text" placeholder="Search here" name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <form action="{{ route('posts.search') }}" method="GET">
+                    <input type="text" name="filter" class="form-control" placeholder="Search posts..." required>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </form>
+                         
             </div>
             </div>
             <!-- search overlay end -->
@@ -173,7 +174,7 @@
                 <div class="card mb-4">
                     <div class="row no-gutters">
                     <div class="col-4 col-md-4">
-                        <a href="single-layout-one.html">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                         <img src="https://demo.codevibrant.com/html/kavya/assets/images/time.jpg" class="card-img" alt="">
                         </a>
                     </div>
@@ -185,7 +186,7 @@
                             <a href="index.html#">Lifestyle</a>
                             </li>
                         </ul>
-                        <h5 class="card-title title-font"><a href="single-layout-one.html">Making time for travel</a>
+                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">Making time for travel</a>
                         </h5>
                         <div class="author-date">
 
@@ -200,7 +201,7 @@
                 <div class="card mb-4">
                     <div class="row no-gutters">
                     <div class="col-4 col-md-4">
-                        <a href="single-layout-one.html">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                         <img src="https://demo.codevibrant.com/html/kavya/assets/images/alone.jpg" class="card-img" alt="">
                         </a>
                     </div>
@@ -211,7 +212,7 @@
                             <a href="index.html#">Lifestyle</a>
                             </li>
                         </ul>
-                        <h5 class="card-title title-font"><a href="single-layout-one.html">It's okay to be alone sometimes</a>
+                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">It's okay to be alone sometimes</a>
                         </h5>
                         <div class="author-date">
                             <a class="date" href="index.html#">
@@ -225,7 +226,7 @@
                 <div class="card mb-4">
                     <div class="row no-gutters">
                     <div class="col-4 col-md-4">
-                        <a href="single-layout-one.html">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                         <img src="https://demo.codevibrant.com/html/kavya/assets/images/forest.jpg" class="card-img" alt="">
                         </a>
                     </div>
@@ -236,7 +237,7 @@
                             <a href="index.html#">travel</a>
                             </li>
                         </ul>
-                        <h5 class="card-title title-font"><a href="single-layout-one.html">Conserve Forest</a>
+                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">Conserve Forest</a>
                         </h5>
                         <div class="author-date">
                             <a class="date" href="index.html#">
@@ -250,7 +251,7 @@
                 <div class="card mb-4">
                     <div class="row no-gutters">
                     <div class="col-4 col-md-4">
-                        <a href="single-layout-one.html">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
                         <img src="https://demo.codevibrant.com/html/kavya/assets/images/beach-sea.jpg" class="card-img" alt="">
                         </a>
                     </div>
@@ -261,7 +262,7 @@
                             <a href="index.html#">Lifestyle</a>
                             </li>
                         </ul>
-                        <h5 class="card-title title-font"><a href="single-layout-one.html">Beach is my favourite place</a>
+                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">Beach is my favourite place</a>
                         </h5>
                         <div class="author-date">
                             <a class="date" href="index.html#">
