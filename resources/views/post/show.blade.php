@@ -11,17 +11,17 @@
                 <div class="blog-content-wrap">
                 <div class="blog-title-wrap">
                     <div class="author-date">
-                    <a class="author" href="{{ route('posts.show', ['post' => $item->id]) }}#">
+                    <a class="author" href="{{ route('posts.show', ['post' => $post->id]) }}#">
                         <img src="{{ asset('storage/' . $post->image) }}" alt="" class="rounded-circle" />
                         <span class="">{{ $post->user->name}}</span>
                     </a>
-                    <a class="date" href="{{ route('posts.show', ['post' => $item->id]) }}#">
+                    <a class="date" href="{{ route('posts.show', ['post' => $post->id]) }}#">
                         <span>{{ $post->created_at->format('d M, Y') }}</span>
                     </a>
                     </div>
                     <ul class="category-tag-list mb-0">
                     <li class="category-tag-name">
-                        <a href="{{ route('posts.show', ['post' => $item->id]) }}#">{{$post->category->name}}</a>
+                        <a href="{{ route('posts.show', ['post' => $post->id]) }}#">{{$post->category->name}}</a>
                     </li>
                     </ul>
                     <h1 class="title-font">{{$post->title}}</h1>
@@ -35,17 +35,17 @@
                     <ul class="sidebar-list tags-list">
                         <p>Tags:</p>
                         @foreach ($tags as $tag)
-                            <li><a href="{{ route('posts.search', ['filter' => tag]) }}">{{ $tag }}</a></li>
+                            <li><a href="{{ route('posts.search', ['filter' => $tag]) }}">{{ $tag }}</a></li>
                         @endforeach
                     </ul>
                     </div>
                     <div class="share-buttons">
                     <p>Share Now:</p>
                     <ul class="share-list">
-                        <li><a href="{{ route('posts.show', ['post' => $item->id]) }}#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/facebook.png" alt=""></a></li>
-                        <li><a href="{{ route('posts.show', ['post' => $item->id]) }}#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/twitter.png" alt=""></a></li>
-                        <li><a href="{{ route('posts.show', ['post' => $item->id]) }}#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/pinterest.png" alt=""></a></li>
-                        <li><a href="{{ route('posts.show', ['post' => $item->id]) }}#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/messenger.png" alt=""></a></li>
+                        <li><a href="#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/facebook.png" alt=""></a></li>
+                        <li><a href="#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/twitter.png" alt=""></a></li>
+                        <li><a href="#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/pinterest.png" alt=""></a></li>
+                        <li><a href="#"><img src="https://demo.codevibrant.com/html/kavya/assets/images/messenger.png" alt=""></a></li>
                     </ul>
                     </div>
                 </div>

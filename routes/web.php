@@ -33,9 +33,9 @@ Route::controller(AuthController::class)->group(function () {
 // Posts Routes
 // ===========================
 
+Route::get('/posts/search', [PostController::class, 'searchByCategoryOrTag'])->name('posts.search');
 Route::get('/posts', [PostController::class, 'frontIndex'])->name('posts.front.index');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/posts/search', [PostController::class, 'searchByCategoryOrTag'])->name('posts.search');
 
 // ===========================
 // Comment Submission

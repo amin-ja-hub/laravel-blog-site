@@ -128,12 +128,12 @@
                                         <div class="category-name-list">
                                             @foreach ($categories as $item)
                                                 <div class="card small-card">
-                                                    <a href="{{ route('posts.show', ['post' => $item->id]) }}"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img"
+                                                    <a href="{{ route('posts.search', ['filter' => $item->name]) }}"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img"
                                                             alt="" /></a>
                                                     <div class="card-img-overlay">
 
                                                         <h5 class="card-title title-font mb-0">
-                                                            <a href="{{ route('posts.show', ['post' => $item->id]) }}">{{$item->name}}</a>
+                                                            <a href="{{ route('posts.search', ['filter' => $item->name]) }}">{{$item->name}}</a>
                                                         </h5>
                                                     </div>
                                                 </div>                                                

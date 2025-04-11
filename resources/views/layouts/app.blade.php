@@ -79,9 +79,23 @@
                     <div class="search-icon">
                         <button class="open-search-btn"><i class="fa fa-search"></i></button>
                     </div>
-                    <div class="sidebar-icon">
-                        <button class="sidebar-btn"> <i class="fas fa-ellipsis-v"></i></button>
-                    </div>
+                    <div class="sidebar-icons">
+                        @auth
+                        @can('AdminView', Auth::user())
+                            <a href="{{ route('posts.index') }}" class="sidebar-btn">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        @else
+                            <a href="{{ route('posts.user.index') }}" class="sidebar-btn">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            @endcan
+                        @else
+                            <a href="{{ route('login.show') }}" class="sidebar-btn">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                        @endauth
+                    </div>                    
                     </div>
 
                 </div>
@@ -122,8 +136,22 @@
                         <button class="open-search-btn"><i class="fa fa-search"></i></button>
                     </div>
                     <div class="sidebar-icon">
-                        <button class="sidebar-btn"> <i class="fas fa-ellipsis-v"></i></button>
-                    </div>
+                        @auth
+                        @can('AdminView', Auth::user())
+                            <a href="{{ route('posts.index') }}" class="sidebar-btn">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        @else
+                            <a href="{{ route('posts.user.index') }}" class="sidebar-btn">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                            @endcan
+                        @else
+                            <a href="{{ route('login.show') }}" class="sidebar-btn">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </a>
+                        @endauth
+                    </div>   
                     </div>
                 </div>
                 </nav>
@@ -142,143 +170,8 @@
                          
             </div>
             </div>
-            <!-- search overlay end -->
 
-            <!-- sticky sidebar -->
-            <div class="sticky-sidebar">
-            <div class="sticky-sidebar-content">
-                <div class="close-sidebar ml-auto">
-                <i class="fas fa-times"></i>
-                </div>
-                <h3>About the Author</h3>
 
-                <div class="author-img">
-                <img src="https://demo.codevibrant.com/html/kavya/assets/images/author.jpg" alt="">
-                </div>
-                <div class="author-desc">
-                <h5 class="mb-2">Julie Ryan</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat consequuntur vel quo, quae aliquam esse
-                    facere eveniet magnam rerum! Quo itaque ipsa a ipsum quaerat optio illo ducimus dolores in!</p>
-                </div>
-                <div class="circular-icons social-links">
-                <ul>
-                    <li><a href="index.html#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="index.html#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="index.html#"><i class="fab fa-pinterest-p"></i></a></li>
-                    <li><a href="index.html#"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-                </div>
-
-                <div class="author-posts">
-                <h3>Most viewed</h3>
-                <div class="card mb-4">
-                    <div class="row no-gutters">
-                    <div class="col-4 col-md-4">
-                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
-                        <img src="https://demo.codevibrant.com/html/kavya/assets/images/time.jpg" class="card-img" alt="">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <div class="card-body">
-                        <ul class="category-tag-list">
-
-                            <li class="category-tag-name">
-                            <a href="index.html#">Lifestyle</a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">Making time for travel</a>
-                        </h5>
-                        <div class="author-date">
-
-                            <a class="date" href="index.html#">
-                            <span>21 Dec, 2019</span>
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="row no-gutters">
-                    <div class="col-4 col-md-4">
-                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
-                        <img src="https://demo.codevibrant.com/html/kavya/assets/images/alone.jpg" class="card-img" alt="">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <div class="card-body">
-                        <ul class="category-tag-list">
-                            <li class="category-tag-name">
-                            <a href="index.html#">Lifestyle</a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">It's okay to be alone sometimes</a>
-                        </h5>
-                        <div class="author-date">
-                            <a class="date" href="index.html#">
-                            <span>21 Dec, 2019</span>
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="row no-gutters">
-                    <div class="col-4 col-md-4">
-                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
-                        <img src="https://demo.codevibrant.com/html/kavya/assets/images/forest.jpg" class="card-img" alt="">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <div class="card-body">
-                        <ul class="category-tag-list">
-                            <li class="category-tag-name">
-                            <a href="index.html#">travel</a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">Conserve Forest</a>
-                        </h5>
-                        <div class="author-date">
-                            <a class="date" href="index.html#">
-                            <span>21 Dec, 2019</span>
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="row no-gutters">
-                    <div class="col-4 col-md-4">
-                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
-                        <img src="https://demo.codevibrant.com/html/kavya/assets/images/beach-sea.jpg" class="card-img" alt="">
-                        </a>
-                    </div>
-                    <div class="col-8 col-md-8">
-                        <div class="card-body">
-                        <ul class="category-tag-list">
-                            <li class="category-tag-name">
-                            <a href="index.html#">Lifestyle</a>
-                            </li>
-                        </ul>
-                        <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">Beach is my favourite place</a>
-                        </h5>
-                        <div class="author-date">
-                            <a class="date" href="index.html#">
-                            <span>21 Dec, 2019</span>
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <!-- sticky sidebar end -->
-
-            <div class="body-overlay"></div>
         </header>
         <!-- header end -->
 

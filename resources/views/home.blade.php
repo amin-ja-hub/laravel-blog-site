@@ -22,7 +22,7 @@ home
                             <div class="banner-text">
                             <ul class="category-tag-list">
                                 <li class="category-tag-name">
-                                <a href="index.html#">{{ $item->category->name }}</a>
+                                <a href="{{ route('posts.search', ['filter' => $item->category->name]) }}">{{ $item->category->name }}</a>
                                 </li>
                             </ul>
                             <div class="title-font">
@@ -54,7 +54,7 @@ home
                     <div class="card-body px-0">
                         <ul class="category-tag-list">
                         <li class="category-tag-name">
-                            <a href="index.html#">{{ $item->category->name }}</a>
+                            <a href="{{ route('posts.search', ['filter' => $item->category->name]) }}">{{ $item->category->name }}</a>
                         </li>
                         </ul>
                         <h5 class="card-title title-font">
@@ -63,11 +63,11 @@ home
                         </a>
                         </h5>
                         <div class="author-date">
-                        <a class="author" href="index.html#">
+                        <a class="author" href="#">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s" alt="" class="rounded-circle" />
                             <span class="writer-name-small">{{ $item->user->name }}</span>
                         </a>
-                        <a class="date" href="index.html#">
+                        <a class="date" href="#">
                             <span>{{ $item->created_at->format('d M, Y') }}</span>
                         </a>
                         </div>
@@ -101,18 +101,18 @@ home
                             <div class="card-body">
                             <ul class="category-tag-list">
                                 <li class="category-tag-name">
-                                <a href="index.html#">{{ $item->category->name }}</a>
+                                <a href="{{ route('posts.search', ['filter' => $item->category->name]) }}">{{ $item->category->name }}</a>
                                 </li>
                             </ul>
                             <h5 class="card-title title-font"><a href="{{ route('posts.show', ['post' => $item->id]) }}">{{ $item->title }}</a>
                             </h5>
                             <p class="card-text"><p class="mb-3">{{ Str::limit($item->content, 150, '...') }}</p><p>
                                 <div class="author-date">
-                                    <a class="author" href="index.html#">
+                                    <a class="author" href="#">
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s" alt="" class="rounded-circle" />
                                     <span class="writer-name-small">{{ $item->user->name }}</span>
                                     </a>
-                                    <a class="date" href="index.html#">
+                                    <a class="date" href="#">
                                     <span>{{ $item->created_at->format('d M, Y') }}</span>
                                     </a>
                                 </div>
@@ -153,10 +153,10 @@ home
                 <div class="sidebar-content">
                 <div class="category-name-list">
                     <div class="card small-card">
-                        <a href="{{ route('posts.show', ['post' => $item->id]) }}"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img" alt="" /></a>
+                        <a href="{{ route('posts.search', ['filter' => $item->category->name]) }}"><img src="https://demo.codevibrant.com/html/kavya/assets/images/shoes.jpg" class="card-img" alt="" /></a>
                         <div class="card-img-overlay">
                             <h5 class="card-title title-font mb-0">
-                            <a href="index.html#">Travel</a>
+                            <a href="#">Travel</a>
                             </h5>
                         </div>
                     </div>
@@ -186,7 +186,7 @@ home
                         <div class="card-body px-0">
                             <ul class="category-tag-list">
                             <li class="category-tag-name">
-                                <a href="index.html#">{{ $item->category->name }}</a>
+                                <a href="{{ route('posts.search', ['filter' => $item->category->name]) }}">{{ $item->category->name }}</a>
                             </li>
                             </ul>
                             <h5 class="card-title title-font">
@@ -194,11 +194,11 @@ home
                                 {{ $item->title }}</a>
                             </h5>
                             <div class="author-date">
-                            <a class="author" href="index.html#">
+                            <a class="author" href="#">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnFRPx77U9mERU_T1zyHcz9BOxbDQrL4Dvtg&s" alt="" class="rounded-circle" />
                                 <span class="writer-name-small">{{ $item->user->name }}</span>
                             </a>
-                            <a class="date" href="index.html#">
+                            <a class="date" href="#">
                                 <span>{{ $item->created_at->format('d M, Y') }}</span>
                             </a>
                             </div>

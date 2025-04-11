@@ -30,6 +30,7 @@ class PostController extends Controller
         $topItems = Post::orderBy('views', 'desc')->take(8)->get();
         $tags = Tag::all();
         $categories = Category::all();
+        return view('post.front-index', compact('posts', 'topItems', 'tags', 'categories'));
 
     }
 
