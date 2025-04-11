@@ -77,16 +77,17 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'required|string|max:255',
             'publish' => 'boolean',
-            'category_id' => 'required|integer|exists:posts,id', 
+            'category_id' => 'required|integer|exists:categories,id', 
         ]);
-
+    
         if ($data['publish'] == 1) { 
             $data['published_at'] = now(); 
         }
-
-        Post::update($data);
-
-        return redirect()->route('post.index');
+    
+        // Update the post
+        $post->update($data);
+    
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
 
     /**
