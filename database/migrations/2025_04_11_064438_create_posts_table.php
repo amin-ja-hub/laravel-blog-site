@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('image');
             $table->integer('publish')->default(0);
-            $table->timestamp('published-at');        
+            $table->timestamp('published_at')->nullable(); // Fixed column name
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
