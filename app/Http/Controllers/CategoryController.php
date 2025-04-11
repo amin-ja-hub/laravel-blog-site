@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'require|string|max:255'
+            'name' => 'required|string|max:255'
         ]);
         Category::create($data);
         return redirect()->route('category.index');
@@ -41,9 +41,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('category.show',[
-            'category' => $category
-        ]);
+
     }
 
     /**
@@ -60,7 +58,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $date = $request->validate([
-            'name' => 'require|string|max:255'
+            'name' => 'required|string|max:255'
         ]);
 
         $category->update($date);
@@ -74,5 +72,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+        return redirect()->route('category.index')->with('success', 'Category deleted successfully!');
     }
+    
 }

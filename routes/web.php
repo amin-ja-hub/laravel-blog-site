@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/posts/{post}/edit', 'edit')->name('posts.edit');
         Route::put('/posts/{post}', 'update')->name('posts.update');
         Route::delete('/posts/{post}', 'destroy')->name('posts.destroy');
-        Route::get('/posts/{user}', 'userIndex')->name('posts.user.index');
+        Route::get('/panel/posts', 'userIndex')->name('posts.user.index');
     });
 });
 

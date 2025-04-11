@@ -27,7 +27,9 @@
                     <th>#</th>
                     <th>Title</th>
                     <th>Author</th>
+                    <th>Category</th>
                     <th>Created At</th>
+                    <th>Updated At</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -36,12 +38,14 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $post->title }}</td>
-                        <td>{{ $post->user->name }}</td>
+                        <td>{{ $post->user->name ?? 'null' }}</td>
+                        <td>{{ $post->category->name ?? 'null' }}</td>
                         <td>{{ $post->created_at->format('Y-m-d') }}</td>
+                        <td>{{ $post->updated_at->format('Y-m-d') }}</td>
                         <td class="text-center">
                             <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('posts.delete', $post->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
@@ -51,6 +55,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center mt-4">
+            {{ $posts->links() }}
+        </div>
     </div>
 
     <!-- No Posts Found Message -->
